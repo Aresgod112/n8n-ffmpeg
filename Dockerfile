@@ -7,18 +7,10 @@ RUN apk update --no-cache && \
     which ffmpeg && \
     ffmpeg -version
 
-# Try switching to the 'node' user
-USER node
-RUN which ffmpeg
-RUN ffmpeg -version
-
 WORKDIR /
 
 ENV PATH="/usr/bin:${PATH}"
 
-RUN chmod +x /usr/bin/ffmpeg
-
-# Run n8n as the 'node' user
-USER node
+# We cannot change permissions, so we'll run as root
 
 # CMD ["npm", "start"] # The base image likely has a CMD
