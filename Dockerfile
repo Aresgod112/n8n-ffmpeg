@@ -1,22 +1,15 @@
 FROM node:18-alpine
 
-# Update package lists
-RUN apk update
+RUN apk update && apk add --no-cache ffmpeg
 
-# Install FFmpeg and its dependencies
-RUN apk add --no-cache ffmpeg
-
-# Set the working directory (adjust if needed for n8n)
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json (if you have them)
+# Copy package.json and lock file first to leverage Docker cache
 COPY package*.json ./
 
-# Install n8n dependencies (adjust if needed)
 RUN npm install --only=production
 
-# Copy your n8n workflow files and any other application code
+# Copy the rest of your application code
 COPY . .
 
-# Specify the command to run n8n (adjust if needed)
 CMD ["npm", "start"]
