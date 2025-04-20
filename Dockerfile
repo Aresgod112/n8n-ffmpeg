@@ -4,13 +4,15 @@ USER root
 
 RUN apk update && apk add --no-cache ffmpeg
 
-# List the contents of common binary directories
-RUN echo "Contents of /usr/bin:" && ls -l /usr/bin
-RUN echo "Contents of /usr/local/bin:" && ls -l /usr/local/bin
-RUN echo "Contents of /opt/bin:" && ls -l /opt/bin # Another potential location
+# Search for the ffmpeg executable
+RUN find / -name "ffmpeg" -print
 
-# ENV PATH="/usr/bin:${PATH}" # We'll add this back if needed
+# RUN echo "Contents of /usr/bin:" && ls -l /usr/bin
+# RUN echo "Contents of /usr/local/bin:" && ls -l /usr/local/bin
+# RUN echo "Contents of /opt/bin:" && ls -l /opt/bin
 
-# USER node # ...
+# ENV PATH="/usr/bin:${PATH}"
+
+# USER node
 
 # ... other configurations ...
