@@ -2,8 +2,8 @@ FROM n8nio/n8n:latest
 
 USER root
 
-RUN apk update && \
-    apk add --no-cache ffmpeg && \
+RUN apk update --no-cache && \
+    apk add --no-cache ffmpeg 2>&1 && \
     which ffmpeg && \
     ffmpeg -version
 
