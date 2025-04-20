@@ -7,6 +7,9 @@ RUN apk update --no-cache && \
     which ffmpeg && \
     ffmpeg -version
 
+# Explicitly set the working directory (though n8n likely sets its own)
+WORKDIR /
+
 # Explicitly add /usr/bin to the PATH
 ENV PATH="/usr/bin:${PATH}"
 
