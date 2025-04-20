@@ -7,8 +7,10 @@ RUN apk update --no-cache && \
     which ffmpeg && \
     ffmpeg -version
 
-# ENV PATH="/usr/bin:${PATH}" # We'll add this back if needed
+# Explicitly add /usr/bin to the PATH
+ENV PATH="/usr/bin:${PATH}"
 
+# Switch back to the n8n user (if known)
 # USER node
 
 # ... other configurations ...
