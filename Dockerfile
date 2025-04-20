@@ -1,20 +1,14 @@
-# Start from a base image (e.g., Node.js or Python)
-FROM node:16-slim
+# Use official Ubuntu as base image
+FROM ubuntu:latest
 
-# Install ffmpeg and other dependencies
-RUN apt-get update && apt-get install -y ffmpeg
+# Install dependencies
+RUN apt-get update && \
+    apt-get install -y \
+    ffmpeg \
+    && apt-get clean
 
-# Set the working directory
-WORKDIR /app
+# Set the working directory (optional)
+WORKDIR /usr/src/app
 
-# Copy your project files
-COPY . /app
-
-# Install dependencies (for example, if you're using Node.js)
-RUN npm install
-
-# Expose the necessary port (e.g., for a web app)
-EXPOSE 3000
-
-# Start your application (adjust to your app)
-CMD ["npm", "start"]
+# Command to run when the container starts
+CMD ["ffmpeg", "-version"]
