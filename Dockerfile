@@ -1,19 +1,13 @@
-# Start with the official Ubuntu image
-FROM ubuntu:latest
+FROM python:3.11-slim
 
-# Set the working directory
-WORKDIR /usr/src/app
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ffmpeg \
+    libsm6 \
+    libxext6 \
+    libxrender1 \
+    && rm -rf /var/lib/apt/lists/*
 
-# Update and install necessary dependencies
-RUN apt-get update && \
-    apt-get install -y software-properties-common && \
-    add-apt-repository universe && \
-    apt-get update && \
-    apt-get install -y ffmpeg && \
-    apt-get clean
-
-# Copy your application files (if any) into the container (adjust the path as needed)
-# COPY . .
-
-# Set the default command for the container (adjust if necessary)
-# CMD ["your-command"]
+WORKDIR /app
+COPY . /app
+RUN pip install --no-cache-dir -r requirements.txt
+CMD ["python", "your_app.py"]
