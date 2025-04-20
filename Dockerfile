@@ -1,8 +1,10 @@
-# Install docker (needed for some features)
-    RUN apk add --no-cache docker
+FROM n8nio/n8n:latest
 
-    # Install ffmpeg
-    RUN apk add --no-cache ffmpeg
+USER root
+RUN apk add --no-cache docker
 
-    # Switch back to the default user 'node'
-    USER node
+# Install ffmpeg
+RUN apk add --no-cache ffmpeg
+
+# Switch back to the default user 'node'
+USER node
